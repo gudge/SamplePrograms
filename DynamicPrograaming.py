@@ -235,6 +235,9 @@ def exercise_3_8():
 	#This implementation is based on 
 	#http://www.eternallyconfuzzled.com/tuts/datastructures/jsw_tut_avl.aspx
 
+	#I will first test insert and see if everything works fine.
+	#Then proceed on to the next.
+
 	class avl_node:
 	  #{
 		def __init__(self, data, balance, link):
@@ -250,12 +253,24 @@ def exercise_3_8():
 	    return None
 	#}
 
-	def min_value_root(root):
+	def min_value_bst(root):
 	#{
-    	if root.link[l] is None:	
+    	if root.link[0] is None:	
 			return root.data
-		val = min_value_root(root.left)  
-		if val >= root.data
+		val = min_value_root(root.link[0])  
+		if val >= root.data:
+		  raising_signals()
+		return val  
+	#}
+
+	def max_value_bst(root):
+	#{
+    	if root.linl[r] is None:
+		   return root.data  
+		val = max_value_root(root.link[1]) 
+		if val < root.data:
+			raising_signals()
+		return val  
 	#}
 
 	def validate_binary_search_tree(root):
@@ -277,8 +292,16 @@ def exercise_3_8():
 		#	raising_signals()
 		#}
 
+		#This function will check if 
+
+		min_val = min_value_bst(root)
+		max_val = max_value_bst(root)
+		if max_val <= min_val:
+			raising_signals()
+
 		if root.balance <= -1 or root.balance >= 1:
-			return  
+			raising_signals()  
+		validate_balance(root.link[0])	
 	#}
 
 	def single_rotation(root, l):
