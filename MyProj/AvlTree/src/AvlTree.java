@@ -14,5 +14,6 @@ public class AvlTree {
 		avlRoot.print_inorder_tree();
 		System.out.println("Height\n");
 		System.out.println(avlRoot.treeHeight());
+		System.out.println(avlRoot.balance());
 	}
 }
