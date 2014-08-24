@@ -24,7 +24,7 @@ class Node {
 	}
 	int length() {
 		Node n = this;
-		int count = 1;
+		int count = 0;
 		while (n != null) {
 			count++;
 			n = n.next;
@@ -46,7 +46,7 @@ public class SinglyLinkedList {
 		}
 		return root;
 	}
-	
+
 	Node middle(Node tree) {
 		Node fast = tree;
 		Node slow = tree;
