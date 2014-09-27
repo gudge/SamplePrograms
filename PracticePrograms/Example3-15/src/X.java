@@ -13,20 +13,21 @@ class X {
 		do {
 			m = random.nextInt(nos);
 		} while (m == 0 || m == 1);
+		n = nos;
 		System.out.println(m);
 		
 		arr = new int[m];
 		for (int i = 0; i < m; i++) {
 			do {
 				arr[i] = random.nextInt(nos);
-			} while (arr[i] == 0 || arr[i] == 1);	
+			} while (arr[i] == 0 || arr[i] == 1 || arr[i] < n);	
 		}
 
 		for (int i = 0; i < m; i++) {
 			System.out.println(arr[i]);
 		}
 		
-		n = nos;
+		
 		b = new int[m];
 		a = new int[n];
 	}
@@ -61,5 +62,10 @@ class X {
 	}
 	public static void main(String[] args) {
 		X x = new X();
+		x.insert(x.arr[3]);
+		x.insert(x.arr[4]);
+		System.out.println(x.search(x.arr[0]));
+		System.out.println(x.search(x.arr[5]));
+		System.out.println(x.search(x.arr[3]));
 	}
 }
