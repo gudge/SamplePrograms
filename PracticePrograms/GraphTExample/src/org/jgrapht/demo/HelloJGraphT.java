@@ -46,6 +46,7 @@ import org.jgrapht.graph.DefaultDirectedGraph;
 import org.jgrapht.graph.SimpleGraph;
 
 
+
 /**
  * A simple introduction to using JGraphT.
  *
@@ -71,6 +72,7 @@ public final class HelloJGraphT
     {
         UndirectedGraph<String, DefaultEdge> stringGraph = createStringGraph();
 
+        
         // note undirected edges are printed as: {<v1>,<v2>}
         System.out.println(stringGraph.toString());
 
