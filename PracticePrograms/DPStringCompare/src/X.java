@@ -70,10 +70,33 @@ class X {
 		c.j = str2.length() - 1;
 		return c;
 	}
-	
-	private static void reconstructpath(String patter, String text, cell[][] m, int i, int j) {
-		
-		
+
+	private static void match_out(String pattern, String text, int i, int j) {
+		if (pattern.charAt(i) == pattern.charAt(j)) System.out.print("M");
+		else System.out.print("S");
+	}
+	private static void insert_out(String text, int j) {
+		System.out.print("I");
+	}
+	private static void delete_out(String pattern, int i) {
+		System.out.print("D");
+	}
+	private static void reconstructpath(String pattern, String text, cell[][] m, int i, int j) {
+		if (m[i][j].parent == -1) return;
+		switch (m[i][j].parent) {
+			case MATCH:
+				reconstructpath(pattern, text, m, i - 1, j - 1);
+				match_out(pattern, text, i , j);
+				break;
+			case INSERT:
+				reconstructpath(pattern, text, m, i, j-1);
+				insert_out(text, j);
+				break;
+			case DELETE:
+				reconstructpath(pattern, text, m, i-1, j);
+				delete_out(pattern, i);
+				break;
+		}	
 	}
 	
 	// p-> pattern
@@ -85,12 +108,6 @@ class X {
 		for (int i = 0; i < MAXLEN + 1; i++) {
 			m[i] = new cell[MAXLEN + 1];
 		}
-		for (int i = 0; i < MAXLEN + 1; i++) {
-			for (int j = 0; j < MAXLEN + 1; j++) {
-				m[i][j] = new cell();
-			}
-		}
-		
 		for (int i = 0; i <= MAXLEN; i++) {
 			row_init(m, i);
 			col_init(m, i);
