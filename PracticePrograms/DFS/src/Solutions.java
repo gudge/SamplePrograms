@@ -1,6 +1,9 @@
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.Iterator;
+import java.util.LinkedList;
 import java.util.Set;
 import java.util.Stack;
 
@@ -30,17 +33,25 @@ class Solutions {
 		graph.get(vertex.get('A')).add('B');
 		graph.get(vertex.get('B')).add('C');
 		graph.get(vertex.get('C')).add('E');
+		graph.get(vertex.get('C')).add('H');
 		graph.get(vertex.get('D')).add('B');
 		graph.get(vertex.get('D')).add('F');
 		graph.get(vertex.get('F')).add('E');
 
-		dfs(graph, vertex);
+		dfs(graph, vertex, noNodes);
 	}
 
-	private static void dfs(ArrayList<ArrayList<Character>> graph, HashMap<Character, Integer> vertex) {
-		Stack<Character> dfs = new Stack<Character>();
-		ArrayList<Character> al = new ArrayList<Character>(graph.size());
-		HashSet<Character> noIncomingNodes = new HashSet<Character>(graph.size());
+	private static void printCharacterarray(ArrayList<Character> arr) {
+		for (Iterator<Character> it = arr.iterator(); it.hasNext();) {
+			System.out.print(it.next());
+			System.out.print(' ');
+		}
+		System.out.println();
+	}
+	
+	private static void dfs(final ArrayList<ArrayList<Character>> graph, 
+			final HashMap<Character, Integer> vertex, final int noNodes) {
+		ArrayList<Character> noIncomingNodes = new ArrayList<Character>(graph.size());
 		noIncomingNodes.add('A');noIncomingNodes.add('B');noIncomingNodes.add('C');
 		noIncomingNodes.add('D');noIncomingNodes.add('E');noIncomingNodes.add('F');
 		noIncomingNodes.add('G');noIncomingNodes.add('H');noIncomingNodes.add('I');
@@ -52,5 +63,37 @@ class Solutions {
 					noIncomingNodes.remove(c);
 			}
 		}
+		Collections.reverse(noIncomingNodes);
+		printCharacterarray(noIncomingNodes);
+		if (noIncomingNodes.size() == 0)
+			return;
+		LinkedList<Character> dfs = new LinkedList<Character>();
+		for (Iterator<Character> it = noIncomingNodes.iterator(); it.hasNext();) {
+			dfs.add(it.next());
+		}
+	
+		for (int i = 0;i < noNodes; i++) {
+			Character n = dfs.get(i);
+			ArrayList<Character> j = graph.get(vertex.get(n));
+			for (int k = 0; k < j.size(); k++) {
+				Character l = j.get(k);
+				if (!dfs.contains(l)) {
+					dfs.add(l);
+				} else {
+					int m1 = dfs.indexOf(n);
+					int m2 = dfs.indexOf(l);
+					if (m2 < m1) {
+						if (m1 < dfs.size() - 1)
+							dfs.add(m1 + 1, l);
+						else
+							dfs.add(l);
+						dfs.remove(l);
+					}
+				}
+			}
+		}
+		System.out.println("Done");
 	}
+
+	
 }
