@@ -92,7 +92,12 @@ class Solutions {
 				}
 			}
 		}
-		System.out.println("Done");
+		System.out.print("Tologial Order : ");
+		for (int i = 0; i < noNodes; i++) {
+			System.out.print(dfs.get(i));
+			System.out.print(' ');
+		}
+		System.out.println();
 	}
 
 	
