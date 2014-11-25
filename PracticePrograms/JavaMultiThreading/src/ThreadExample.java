@@ -34,7 +34,7 @@ class Y4 {
 }
 
 public class ThreadExample {
-	public static void main(String[] args) {
+	public static void main(String[] args) throws InterruptedException {
 		Y y = new Y();
 		y.bar();
 		Y2 y2 = new Y2();
