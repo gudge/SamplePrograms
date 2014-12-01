@@ -2,7 +2,7 @@
 
 class Solutions {	
 	private static void printArray(String pattern, int[] arr) {
-		if (true)
+		if (false)
 			return;
 		System.out.println(pattern);
 		System.out.print("  ");
@@ -42,22 +42,18 @@ class Solutions {
 		// Proper prefix: All the characters in a string, with one or more cut off the end.
 		// Proper suffix: All the characters in a string, with one or more cut off the beginning.
 
-		for (int i = 2, len = pattern.length(); i < len; i++) {
-			int j = failure_table[i-2];
-			if (pattern.charAt(i-1) == pattern.charAt(j)) {
-				failure_table[i-1] = failure_table[i-2] + 1;
+		for (int i = 1, len = pattern.length(); i < len; i++) {
+			int j = failure_table[i-1];
+			if (pattern.charAt(i) == pattern.charAt(j)) {
+				failure_table[i] = failure_table[i-1] + 1;
 			}
-		}
-		int len = pattern.length() - 1;
-		if (pattern.charAt(len) == pattern.charAt(failure_table[len])) {
-			failure_table[len] = failure_table[len] +1;
 		}
 		printArray(pattern, failure_table);
 		return failure_table;
 	}
 	public static void main(String[] args) {		
 		//String text = "ABC ABCDAB ABCDABCDABDE";
-		//String pattern1 = "ABCDABD";
+		//String pattern = "ABCDABD";
 		//String pattern2 = "abababca";
 		//String pattern3 = "PARTICIPATE IN PARACHUTE";
 
@@ -67,8 +63,11 @@ class Solutions {
 		//String text = "THIS IS A TEST TEXT";
 		//String pattern = "TEST";
 		
-		String text = "AABAACAADAABAAABAA";
-		String pattern = "AABA";
+//		String text = "AABAACAADAABAAABAA";
+//		String pattern = "AABA";
+		
+		String text = "abcabcbabcabc";
+		String pattern = "abcabcabc";
 		
 		int[] failureTable = getFailureTable(pattern);
 		//failureTable = getFailureTable(pattern2);
