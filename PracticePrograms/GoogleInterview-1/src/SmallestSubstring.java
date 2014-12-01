@@ -17,9 +17,15 @@ class SmallestSubstring {
 		int bestlength = 0, start = 0;
 		for (int i = 0, len = str.length(); i < len;) {			
 			Character c = str.charAt(0);
+<<<<<<< HEAD
 			if (arr.remove(c)) {
 				if (arr.size() == 0)
 			}
+=======
+//			if (arr.remove(c)) {
+//				if (arr.size() == 0)
+//			}
+>>>>>>> RotateMatrix
 				
 		}
 		
