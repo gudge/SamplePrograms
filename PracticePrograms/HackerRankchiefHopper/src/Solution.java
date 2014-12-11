@@ -12,25 +12,21 @@ public class Solution {
 	}
 
     public static void main(String[] args) {
-//    	Scanner in = new Scanner(System.in);
-//    	String l = in.nextLine();
-//    	final Integer N = Integer.parseInt(l);
-//    	l = in.nextLine();
-//    	String[] l2 = l.split(" ");
-//    	int[] arr = new int[N];
-//    	for (int i = 0; i < N; i ++) {
-//    		arr[i] = Integer.parseInt(l2[i]);
-//    	}
-//    	if (N == 0) {
-//    		System.out.println(0);
-//    		in.close();
-//    		return;
-//    	} else if (N == 1) {
-//    		System.out.println(arr[0]);
-//    		in.close();
-//    		return;
-//    	}
-//    	in.close();
+    	Scanner in = new Scanner(System.in);
+    	String l = in.nextLine();
+    	final Integer N = Integer.parseInt(l);
+    	l = in.nextLine();
+    	String[] l2 = l.split(" ");
+    	int[] arr = new int[N];
+    	for (int i = 0; i < N; i ++) {
+    		arr[i] = Integer.parseInt(l2[i]);
+    	}
+    	if (N == 0) {
+    		System.out.println(0);
+    		in.close();
+    		return;
+    	}
+    	in.close();
 
 //    	final int N = getN(100);
 //    	int[] arr = new int[N];
@@ -38,48 +34,56 @@ public class Solution {
 //    		arr[i] = getN(100);
 //    	}
 
-    	String l = "68 19 32 87 23 54 82 82 70 5 11 16 42 36 62 86 4 15 91 42 61 82 53 2 92 27 36 92 83 16 94 23 74 45 24 92 64 52 83 27 4 35 30 49 44 97 38 38 27 48 44 39 91 17 46 66 9 74 79 33 74 95 87 58 53 73 47 10 59 94 33 62 91 68 39 42 29 49 33 15 38 62 59 31 22 5 96 8 29"; 
-    	String[] l2 = l.split(" ");
-    	final int N = l2.length;
-    	int[] arr = new int[N];
-    	for (int i = 0; i < N; i++) {
-    		arr[i] = Integer.parseInt(l2[i]);
-    	}
-    	l2 = null;
-    	l = null;
+    	//String l = "68 19 32 87 23 54 82 82 70 5 11 16 42 36 62 86 4 15 91 42 61 82 53 2 92 27 36 92 83 16 94 23 74 45 24 92 64 52 83 27 4 35 30 49 44 97 38 38 27 48 44 39 91 17 46 66 9 74 79 33 74 95 87 58 53 73 47 10 59 94 33 62 91 68 39 42 29 49 33 15 38 62 59 31 22 5 96 8 29";
+//    	String l = "4";
+//    	String[] l2 = l.split(" ");
+//    	final int N = l2.length;
+//    	int[] arr = new int[N];
+//    	for (int i = 0; i < N; i++) {
+//    		arr[i] = Integer.parseInt(l2[i]);
+//    	}
+//    	l2 = null;
+//    	l = null;
 
-    	long[] arr2 = new long[N];
+    	//long[] arr2 = new long[N];
     	long sum = (long) 0;
-    	long j = 1;
-    	sum = arr[N - 1];
-    	arr2[N-1] = sum;
-    	for (int i = N - 2; i >= 0; i--, j = 2 * j) {
-    		if (i == 4) {
-    			System.out.println(i);
-    			int j3 = arr[i];
-    			System.out.println(j3);
-    		}
+    	sum = arr[N-1] % 2  == 0 ? arr[N-1] / 2 : arr[N-1] / 2 + 1;
+    	//arr2[N-1] = sum;
+    	for (int i = N - 2; i >= 0; i--) {
+//    		if (i == 4) {
+//    			System.out.println(i);
+//    			int j3 = arr[i];
+//    			System.out.println(j3);
+//    		}
     		long k2 = (sum + arr[i])/2;
     		if ((sum + arr[i]) % 2 == 1)
     			k2 += 1;
     		sum = k2;
-    		arr2[i] = k2;
+    		//arr2[i] = k2;
     	}
     	System.out.println(sum);
     	
     	//print1(N, sum);
-    	boolean ret2 = verify(arr, sum, N, arr2, true);
-    	System.out.println(ret2);
-    	if (ret2) {
-    		boolean ret3 = verify(arr, sum-1, N, arr2, true);
-    		if(!ret3) {
-    			System.out.println("Good answer");
-    		}
-    	}
-    	if (!ret2) {
-    		print1(N, sum);
-    		print2(arr, N);
-    	}
+//    	boolean ret2 = verify(arr, sum, N, arr2, true);
+//    	System.out.println(ret2);
+//    	if (!ret2) {
+//    		boolean ret3 = verify(arr, sum-1, N, arr2, true);
+//    		System.out.println("sum-1 " + ret3);
+//    	}
+//    	if (!ret2) {
+//    		boolean ret3 = verify(arr, sum+1, N, arr2, true);
+//    		System.out.println("sum+1 " + ret3);
+//    	}
+//    	if (ret2) {
+//    		boolean ret3 = verify(arr, sum-1, N, arr2, true);
+//    		if(!ret3) {
+//    			System.out.println("Good answer");
+//    		}
+//    	}
+//    	if (!ret2) {
+//    		print1(N, sum);
+//    		print2(arr, N);
+//    	}
     }
 
 	private static boolean verify(int[] arr, long sum, int N, long[] arr2, boolean print) {
@@ -102,7 +106,8 @@ public class Solution {
 			if (i != N-1) {
 				long sum4 = arr2[i+1];
 				if (sum != sum4) {
-					System.out.println("Wrong\n");
+					//System.out.println("Wrong\n");
+					return false;
 				}
 			}	
 			if (print && sum < 0) {
