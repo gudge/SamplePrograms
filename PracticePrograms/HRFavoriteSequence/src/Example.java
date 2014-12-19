@@ -8,5 +8,6 @@ public class Example {
 		for (Integer y : x) {
 			System.out.println(y);
 		}
+		x.
 	}
 }
