@@ -422,7 +422,7 @@ class Y{
 	}
 
 	private void print(int[] a) {
-		
+
 		for(int i = 0, len = a.length; i < len; i++) {
 			System.out.print(a[i]);
 			System.out.print(' ');
@@ -649,7 +649,7 @@ class Y{
 			max3 = max2;
 		System.out.println(max2);
 	}
-	
+
 	void qsort(int[] a, int l, int h) {
 		int i = l;
 		int j = h;
@@ -678,10 +678,131 @@ class Y{
 		int[] a = new int[MAX];
 		for (int i = 0, len = a.length; i < len; i++)
 			a[i] = rand.nextInt(MAX);
-		
+
 		print(a);
 		qsort(a, 0, a.length - 1);
 		print(a);
+	}
+
+	public void sortedarray() {
+		int[] a = new int[] {3, 4, 5, 1, 2};
+		int p = -1;
+		int l = 0;
+		int h = a.length -1;
+		while(l < h) {
+			p = l + (h-l)/2;
+			if (p + 1 <= h && a[p] > a[p+1] && p-1 >= 0 && a[p] > a[p-1]) break;
+		}
+		System.out.println(p);
+
+	}
+	boolean scanrow(int[][] a, int r) {
+		if (a == null || a.length == 0 || a[0].length == 0 || r < 0 || r >= a.length )
+			return false;
+		for (int i = 0, c = a[0].length; i < c; i++)
+			if (a[r][i] == 1)
+				return true;
+		return false;
+	}
+	boolean scancol(int[][] a, int c) {
+		if (a == null || a.length == 0 ||a[0].length == 0 || c < 0 || c >= a[0].length)
+			return false;
+		for (int i = 0, r = a.length; i < r; i++)
+			if (a[i][c] == 1)
+				return true;
+		return false;
+	}
+	// Set all the elements of the row to 1.
+	void setallonesR(int[][] a, int r) {
+		if (a == null || a.length == 0 || a[0].length == 0 || r < 0 || r >= a.length )
+			return;
+		for (int i = 0,  c = a[0].length; i < c; i++)
+			a[r][i] = 1;
+	}
+	void setallonesC(int[][] a, int c) {
+		if (a == null || a.length == 0 ||a[0].length == 0 || c < 0 || c >= a[0].length)
+			return;
+		for (int i = 0, r = a.length; i < r; i++)
+			a[i][c] = 1;
+	}
+
+	public void fillmatrix2() {
+		// http://stackoverflow.com/questions/10840044/microsoft-interview-transforming-a-matrix
+
+		int[][] a = new int[][] {
+				{1, 1, 0, 1, 0},
+				{0, 0, 0, 0, 0},
+				{0, 1, 0, 0, 0},
+				{1, 0, 1, 1, 0},
+		};
+		final int r = a.length;
+		final int c = a[0].length;
+
+		boolean frow = scanrow(a, 0);
+		boolean fcol = scancol(a, 0);
+
+		printm(a);
+
+		// Store the values in first rwo and first col
+		for (int i = 1; i < r; i++)
+			a[i][0] = scanrow(a, i) ? 1 : 0;
+		for (int i = 1; i < c; i++)
+			a[0][i] = scancol(a, i) ? 1 : 0;
+
+		if (frow || fcol)
+			a[0][0] = 1;
+
+		for (int i = 1; i < r; i++) {
+			for (int j = 1; j < c; j++) {
+				if (a[i][j] == 0)
+					a[i][j] = a[i][0] | a[0][j];
+			}
+		}
+
+		if (frow)
+			setallonesR(a, 0);
+		if (fcol)
+			setallonesC(a, 0);
+
+		printm(a);
+	}
+
+	void printm(int[][] a) {
+		final int r = a.length;
+		final int c = a[0].length;
+
+		for (int i = 0; i < r; i++) {
+			for (int j = 0; j < c; j++) {
+				if (a[i][j] < 10)
+					System.out.print(' ');
+				System.out.print(a[i][j]);
+				System.out.print(' ');
+			}
+			System.out.println();
+		}
+		System.out.println();
+	}
+
+	public void rotmatrix() {
+		final int N = 5;
+		final int M = 5;
+		int[][] a = new int[N][M];
+		for (int i = 0, c = 0; i < N; i++) {
+			for (int j = 0; j < M; j++) {
+				a[i][j] = c++;
+			}
+		}
+		printm(a);
+		for (int i = 0, noiter = N % 2 == 0 ? N/2 : N/2 + 1; i < noiter; i++) { 
+			for (int j = i,c = M-i-1; j < c; j++) {
+				int temp = a[i][j];
+				a[i][j] = a[N-1-j][i];
+				a[N-1-j][i] = a[N-1-i][N-1-j]; 
+				a[N-1-i][N-1-j] = a[j][N-1-i];
+				a[j][N-1- i] = temp;
+			}
+		}
+		printm(a);
 	}
 }
 
@@ -704,7 +825,10 @@ class X {
 		//y.doublylinkedlist();
 
 		//y.maxarray();
-		y.sorting();
+		//y.sorting();
+		//y.sortedarray();
+		//y.fillmatrix2();
+		y.rotmatrix();
 		System.out.println("Done");
 	}
 }
