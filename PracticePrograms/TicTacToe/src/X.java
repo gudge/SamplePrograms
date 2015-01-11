@@ -1,6 +1,8 @@
 import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.Queue;
 import java.util.Random;
+import java.util.Stack;
 import java.util.StringTokenizer;
 
 
@@ -804,6 +806,94 @@ class Y{
 		}
 		printm(a);
 	}
+
+	public void hackerrank_w13_taum_bday() {
+
+
+		long range = 1234567L;
+		Random rand = new Random();
+		final long X = (long)(rand.nextDouble()*range);
+		final long Y = (long)(rand.nextDouble()*range);
+		final long Z = (long)(rand.nextDouble()*range);
+		final long B = (long)(rand.nextDouble()*range);
+		final long W = (long)(rand.nextDouble()*range);
+		
+		System.out.println(X + " " + Y + " " + Z + " " +  B + "  " + W);
+
+	}
+
+	public void twostacksqueue() {
+		class Queue2 {
+			Stack<Integer> stackIn = new Stack<Integer>();
+			Stack<Integer> stackOut = new Stack<Integer>();
+
+			void enqueue(int i) {
+				stackIn.push(i);
+			}
+			int dequeue() {
+				if (stackOut.empty()) {
+					while(!stackIn.empty())
+						stackOut.push(stackIn.pop());
+				}
+				return stackOut.pop();
+			}
+		}
+		Queue2 q = new Queue2();
+		for (int i = 0; i < 5; i++)
+			q.enqueue(i);
+		for (int i = 0; i < 5; i++)
+			System.out.println(q.dequeue());
+	}
+
+	boolean anagrams2(int[] c1, int[] c2) {
+		if (c1 == null || c2 == null || c1.length != c2.length)
+			return false;
+		for (int i = 0, len = c1.length; i < len; i++) {
+			if (c1[i] != c2[i])
+				return false;
+		}
+		return true;
+	}
+	
+	public void anagrams() {
+		// http://www.crazyforcode.com/microsoft-interview-questions-internship-set-4/
+		// http://www.geeksforgeeks.org/anagram-substring-search-search-permutations/
+	
+//		final String text = "BACDGABCDA";
+//		final String pat = "ABCD";
+	
+		//final String text = "geeksforgeeks";
+		//final String pat = "forgeeksgeeks";
+		
+		final String text = "AAABABAA";
+		final String pat = "AABA";
+
+		if (pat.length() > text.length())
+			return;
+
+		final int MAX = 256;
+		int[] ct = new int[MAX];
+		int[] cp = new int[MAX];
+		
+		for (int i = 0, len = pat.length(); i < len; i++) {
+			cp[pat.charAt(i)]++;
+			ct[text.charAt(i)]++;
+		}
+		int cnt = 0;
+		for (int len1 = pat.length(), i = len1, len2 = text.length(); i < len2; i++) {
+			if (anagrams2(cp, ct))
+				cnt++;
+			ct[text.charAt(i)]++;
+			ct[text.charAt(i-len1)]--;
+		}
+
+		if (anagrams2(cp, ct))
+			cnt++;
+		
+		System.out.println(text);
+		System.out.println(pat);
+		System.out.println(cnt);
+	}
 }
 
 class X {
@@ -828,7 +918,18 @@ class X {
 		//y.sorting();
 		//y.sortedarray();
 		//y.fillmatrix2();
-		y.rotmatrix();
+		//y.rotmatrix();
+
+		//y.twostacksqueue();
+		y.anagrams();
+		//y.hackerrank_w13_taum_bday();
+		
+		
+		// http://topcoder.bgcoder.com/index.php?search=rings
+		// String related questuions in top coder
+		
+		
+		// http://www.careercup.com/page?pid=microsoft-interview-questions
 		System.out.println("Done");
 	}
 }
