@@ -82,8 +82,9 @@ public class X {
 	static int getDNAAlignment(String dna1, String dna2) {
 
 		final int[][] m = new int[][] {
-				{5, -1, -2, -1, -3},
-				{-1, 5, -3, -2, -4},
+		//       A   C   G   T   -
+		/*A*/	{5, -1, -2, -1, -3},
+		/*C*/	{-1, 5, -3, -2, -4},
 				{-2, -3, 5, -2, -2},
 				{-1, -2, -2, 5, -1},
 				{-3, -4, -2, -1, 0}
@@ -101,6 +102,8 @@ public class X {
 		int[] T = new int[l1+l2];
 		init2(T);
 		
+		// The values in the array are such that
+		// match is always favored.
 		int i = 0, j = 0;
 		while (true) {
 			
